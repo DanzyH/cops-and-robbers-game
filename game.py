@@ -1,8 +1,9 @@
 import pygame
 import sys
 from gameState import GameStateManager
-from states.level import LevelSelector
 from states.start import Start
+from states.editor import GraphEditor
+from states.level import LevelSelector
 from states.play import Play
 
 SCREENWIDTH, SCREENHEIGHT = 1280, 700
@@ -17,22 +18,19 @@ class Game:
         self.gameStateManager = GameStateManager("start")
 
         self.start = Start(self.screen, self.gameStateManager)
+        self.editor = GraphEditor(self.screen, self.gameStateManager)
         self.levelSelector = LevelSelector(self.screen, self.gameStateManager)
         self.play = Play(self.screen, self.gameStateManager)
 
         self.states = {
             'start': self.start, 
-            'play': self.play, 
-            'level_select': self.levelSelector
+            'edit': self.editor,
+            'level_select': self.levelSelector,
+            'play': self.play 
             }
         
     def mainloop(self):
         while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-            
             self.states[self.gameStateManager.getState()].run()
 
             pygame.display.update()

@@ -1,12 +1,20 @@
 import pygame
+import sys
 
 class Play():
-    def __init__(self, display, gameStateManager):
+    def __init__(self, display, game_state_manager):
         self.display = display
-        self.gameStateManager = gameStateManager
+        self.game_state_manager = game_state_manager
     
     def run(self):
+        # Draw graphics
         self.display.fill('blue')
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_ESCAPE]:
-            self.gameStateManager.setState('level_select')
+
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.game_state_manager.setState('level_select')
