@@ -1,13 +1,10 @@
 import pygame
-import sys
+from const import *
 from gameState import GameStateManager
 from states.start import Start
 from states.editor import GraphEditor
 from states.level import LevelSelector
 from states.play import Play
-
-SCREENWIDTH, SCREENHEIGHT = 1280, 700
-FPS = 60
 
 class Game:
     def __init__(self):

@@ -3,6 +3,7 @@ import sys
 import os
 import json
 import math
+from const import *
 from tkinter import filedialog
 
 CYAN = (0, 255, 255)
@@ -44,7 +45,7 @@ class GraphEditor:
 
     def save_graph(self):
         root = os.getcwd()
-        file_path = filedialog.asksaveasfilename(initialdir=f"{root}/data/custom_levels/", title="Save Graph", filetypes=[("JSON files", "*.json")])
+        file_path = filedialog.asksaveasfilename(initialdir=f"{root}/data/Custom levels/", title="Save Graph", filetypes=[("JSON files", "*.json")])
         data = {
             "vertices": [(vertex.x, vertex.y) for vertex in self.vertices],
             "edges": [(self.vertices.index(edge.start), self.vertices.index(edge.end)) for edge in self.edges]
@@ -63,7 +64,7 @@ class GraphEditor:
     
     def load_file_dialog(self):
         root = os.getcwd()
-        file_name = filedialog.askopenfilename(initialdir=f"{root}/data/custom_levels/", title="Select a graph file", filetypes=[("JSON files", "*.json")])
+        file_name = filedialog.askopenfilename(initialdir=f"{root}/data/Custom levels/", title="Select a graph file", filetypes=[("JSON files", "*.json")])
         return file_name
     
     def run(self):
