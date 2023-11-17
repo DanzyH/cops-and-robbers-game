@@ -81,9 +81,9 @@ class LevelSelector:
                 if is_point_inside_rect(mouse_pos, item_rect) or item_data[i] == self.selected_level:
                     pygame.draw.rect(self.display, (150, 150, 150), item_rect, 2)
         
-        START_BTN = Button(image=None, pos=(SCREENWIDTH * 3 / 4, 300), text_input="START", font=get_font(FONT_PATH, 75), base_color="#232227", hovering_color="White")
-        GAME_MODE_BTN = Button(image=None, pos=(SCREENWIDTH * 3 / 4, 450), text_input=f"<{self.game_mode}>", font=get_font(FONT_PATH, 75), base_color="#232227", hovering_color="White")
-        BACK_BUTTON = Button(image=None, pos=(SCREENWIDTH * 3 / 4, 600), text_input="BACK", font=get_font(FONT_PATH, 75), base_color="#232227", hovering_color="White")
+        START_BTN = Button(image=None, pos=(SCREENWIDTH * 3 / 4, 300), text_input="START", font=get_font(FONT_PATH, 75), base_color="#232227", hovering_color="red")
+        GAME_MODE_BTN = Button(image=None, pos=(SCREENWIDTH * 3 / 4, 450), text_input=f"<{self.game_mode}>", font=get_font(FONT_PATH, 75), base_color="#232227", hovering_color="red")
+        BACK_BUTTON = Button(image=None, pos=(SCREENWIDTH * 3 / 4, 600), text_input="BACK", font=get_font(FONT_PATH, 75), base_color="#232227", hovering_color="red")
              
         buttons = [
             START_BTN,
@@ -111,21 +111,21 @@ class LevelSelector:
                     
                     # Check if a button was clicked
                     if START_BTN.check_for_input(event.pos):
-                        if self.selected_level is not None:
+                        if self.selected_level:
                             folder_path = f"{root}/data/{self.current_tab}"
                             with open(f"{folder_path}/{self.selected_level}.json", 'r') as openfile:
                                 # Reading from json file
                                 json_data = json.load(openfile)
                             json_data['game_mode'] = self.game_mode
-                            with open(f"{root}/data/selected_level.json", 'w') as outfile:
+                            with open(f"{root}/data/{GAME_DATA_FILE}", 'w') as outfile:
                                 # Writing to json file
                                 json.dump(json_data, outfile)
                             print(json_data['game_mode'])
                             self.reset()
-                            self.game_state_manager.setState('play')
+                            self.game_state_manager.set_state('play')
                     if BACK_BUTTON.check_for_input(event.pos):
                         self.reset()
-                        self.game_state_manager.setState('start')
+                        self.game_state_manager.set_state('start')
                     if GAME_MODE_BTN.check_for_input(event.pos):
                         if self.game_mode == 'PVP':
                             self.game_mode = 'PVE'

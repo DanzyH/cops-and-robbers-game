@@ -20,7 +20,7 @@ class Game:
         self.play = Play(self.screen, self.gameStateManager)
 
         self.states = {
-            'start': self.start, 
+            'start': self.start,
             'edit': self.editor,
             'level_select': self.levelSelector,
             'play': self.play 
@@ -28,7 +28,7 @@ class Game:
         
     def mainloop(self):
         while True:
-            self.states[self.gameStateManager.getState()].run()
+            self.states[self.gameStateManager.get_state()].run()
 
             pygame.display.update()
             self.clock.tick(FPS)

@@ -39,9 +39,9 @@ class Start:
                     sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.check_for_input(event.pos):
-                    self.game_state_manager.setState('level_select')
+                    self.game_state_manager.set_state('level_select')
                 if MAP_EDITOR_BUTTON.check_for_input(event.pos):
-                    self.game_state_manager.setState('edit')
+                    self.game_state_manager.set_state('edit')
                 if QUIT_BUTTON.check_for_input(event.pos):
                     pygame.quit()
                     sys.exit()
